@@ -1,0 +1,73 @@
+========================================
+HƯỚNG DẪN DEPLOY BLOG LÊN GITHUB PAGES
+(Miễn phí, không cần server)
+========================================
+
+CHUẨN BỊ
+---------
+- Tạo tài khoản GitHub tại: github.com (miễn phí)
+- Không cần biết code hay terminal
+
+========================================
+BƯỚC 1: Tạo repository trên GitHub
+========================================
+1. Đăng nhập github.com
+2. Click nút "+" góc phải trên → "New repository"
+3. Repository name: vietthuynguyen.com
+   (hoặc tên bất kỳ bạn muốn)
+4. Chọn "Public"
+5. Click "Create repository"
+
+========================================
+BƯỚC 2: Upload file lên GitHub
+========================================
+1. Trong trang repo vừa tạo, click "uploading an existing file"
+2. Kéo thả 2 file vào:
+   - index.html  ← trang chủ
+   - post.html   ← trang bài viết mẫu
+3. Scroll xuống → click "Commit changes"
+
+========================================
+BƯỚC 3: Bật GitHub Pages
+========================================
+1. Click tab "Settings" (trong repo)
+2. Tìm mục "Pages" ở sidebar trái
+3. Mục "Source" → chọn "Deploy from a branch"
+4. Branch → chọn "main"
+5. Folder → chọn "/ (root)"
+6. Click "Save"
+
+========================================
+BƯỚC 4: Lấy link website
+========================================
+1. Sau 1-2 phút, refresh trang Settings → Pages
+2. Sẽ thấy link dạng:
+   https://[username].github.io/vietthuynguyen.com/
+3. Click vào để xem blog live!
+
+========================================
+SỬ DỤNG TÊN MIỀN RIÊNG (vietthuynguyen.com)
+========================================
+Nếu bạn đã mua domain vietthuynguyen.com:
+1. Trong Settings → Pages → "Custom domain"
+2. Điền: vietthuynguyen.com → Save
+3. Vào trang quản lý domain, tạo DNS record:
+   Type: CNAME
+   Name: www
+   Value: [username].github.io
+4. Đợi 24h để DNS propagate
+
+========================================
+CẬP NHẬT BÀI VIẾT MỚI
+========================================
+Mỗi khi có bài mới:
+1. Tạo file .html mới theo template post.html
+2. Vào github.com → repo của bạn
+3. Click "Add file" → "Upload files"
+4. Upload file mới → Commit
+5. Website tự cập nhật sau ~30 giây
+
+========================================
+HỖ TRỢ
+========================================
+Có vấn đề? Nhắn tin tại: vietthuynguyen.com/lien-he

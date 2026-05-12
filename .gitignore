@@ -1,0 +1,5 @@
+set-token.bat
+*.bat
+__pycache__/
+*.pyc
+.env

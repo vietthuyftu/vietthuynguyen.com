@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study — Thực tế dùng AI bán hàng | AI Ecom Vietnam</title>
+  <meta name="description" content="Phân tích thực tế các shop đã dùng AI để tăng doanh thu — số liệu cụ thể, bài học áp dụng được ngay.">
+  <style>
+    :root {
+      --bg: #0f1117; --bg2: #1a1d27; --bg3: #22263a;
+      --border: #2e3350; --text: #e2e8f0; --text-muted: #8892b0;
+      --accent: #7c3aed; --accent2: #a855f7;
+      --accent-glow: rgba(124,58,237,0.18);
+      --green: #10b981; --orange: #f59e0b;
+      --radius: 12px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 24px;
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .logo { font-size: 1.1rem; font-weight: 700; background: linear-gradient(135deg, #a855f7, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--text-muted); font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta { background: var(--accent); color: #fff !important; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: .85rem; }
+
+    .page-header { max-width: 1100px; margin: 0 auto; padding: 60px 24px 40px; }
+    .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 12px; }
+    .page-header p { color: var(--text-muted); font-size: 1.05rem; max-width: 560px; }
+
+    /* STATS BAR */
+    .stats-bar {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 40px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    .stat {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; text-align: center;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--green); }
+    .stat-label { font-size: .82rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* FEATURED CASE */
+    .section { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+    .section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
+
+    .featured-case {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      margin-bottom: 40px;
+      transition: border-color .2s, transform .2s;
+    }
+    .featured-case:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .case-visual {
+      background: linear-gradient(135deg, #0d2b1e, #0f4f35);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 36px; gap: 20px;
+    }
+    .case-icon { font-size: 4rem; }
+    .result-pills { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .result-pill {
+      background: rgba(16,185,129,.15); border: 1px solid var(--green);
+      border-radius: 8px; padding: 10px 14px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .pill-label { font-size: .78rem; color: var(--text-muted); }
+    .pill-val { font-weight: 800; color: var(--green); font-size: 1rem; }
+    .case-body { padding: 36px 32px; }
+    .case-tag {
+      display: inline-block; background: var(--accent-glow); color: var(--accent2);
+      border: 1px solid var(--accent); padding: 3px 12px; border-radius: 99px;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; margin-bottom: 14px;
+    }
+    .case-body h2 { font-size: 1.4rem; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
+    .case-body p { color: var(--text-muted); margin-bottom: 16px; font-size: .95rem; }
+    .case-meta { display: flex; gap: 20px; color: var(--text-muted); font-size: .82rem; flex-wrap: wrap; }
+
+    /* CASE GRID */
+    .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .case-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .case-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .card-top {
+      padding: 24px; display: flex; gap: 16px; align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-emoji { font-size: 2.4rem; flex-shrink: 0; }
+    .card-info h3 { font-size: .98rem; font-weight: 700; line-height: 1.45; margin-bottom: 6px; }
+    .card-info p { color: var(--text-muted); font-size: .83rem; }
+    .card-results {
+      padding: 18px 24px; display: grid;
+      grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .result-item { text-align: center; }
+    .result-val { font-size: 1.1rem; font-weight: 800; color: var(--green); }
+    .result-label { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
+    .card-footer-row {
+      padding: 14px 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .read-time { color: var(--text-muted); font-size: .78rem; }
+    .read-more { color: var(--accent2); font-size: .82rem; font-weight: 600; }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { color: var(--text-muted); font-size: .82rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .featured-case { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="nav-links">
+      <a href="how-to.html">How-to</a>
+      <a href="case-study.html" class="active">Case Study</a>
+      <a href="tools.html">Tools</a>
+      <a href="about.html">Về mình</a>
+      <a href="#" class="nav-cta">Nhận bài mới</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>📦 Case Study thực tế</h1>
+  <p>Số liệu cụ thể từ shop thực. Không phải lý thuyết — là thứ đã xảy ra thật.</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Case study đã phân tích</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">+38%</div>
+    <div class="stat-label">Tăng đơn trung bình</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">12h</div>
+    <div class="stat-label">Tiết kiệm/tuần trung bình</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Ngành hàng được cover</div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-title">🔥 Case nổi bật</div>
+
+  <a href="post.html" class="featured-case">
+    <div class="case-visual">
+      <div class="case-icon">👗</div>
+      <div class="result-pills">
+        <div class="result-pill">
+          <span class="pill-label">Đơn hàng</span>
+          <span class="pill-val">+40%</span>
+        </div>
+        <div class="result-pill">
+          <span class="pill-label">Thời gian tiết kiệm</span>
+          <span class="pill-val">15h/tuần</span>
+        </div>
+        <div class="result-pill">
+          <span class="pill-label">Thời gian thực hiện</span>
+          <span class="pill-val">6 tuần</span>
+        </div>
+      </div>
+    </div>
+    <div class="case-body">
+      <span class="case-tag">Case Study</span>
+      <h2>Shop thời trang 5 người dùng AI phân tích đối thủ — Tăng 40% đơn sau 6 tuần</h2>
+      <p>Họ dùng ChatGPT để đọc 200 review đối thủ, tìm ra gap thị trường mà mình chưa khai thác, và điều chỉnh lại toàn bộ listing + caption trong 3 ngày.</p>
+      <p>Kết quả: tỉ lệ chuyển đổi từ 1.8% lên 2.9% — không thay đổi sản phẩm, không tăng ngân sách ads.</p>
+      <div class="case-meta">
+        <span>📅 10/05/2026</span>
+        <span>⏱ 9 phút đọc</span>
+        <span>🏷 Shopee · Thời trang nữ</span>
+      </div>
+    </div>
+  </a>
+</section>
+
+<section class="section">
+  <div class="section-title">📚 Tất cả case study</div>
+  <div class="case-grid">
+
+    <a href="post.html" class="case-card">
+      <div class="card-top">
+        <div class="card-emoji">📱</div>
+        <div class="card-info">
+          <h3>Shop phụ kiện điện thoại dùng AI viết 500 listing trong 2 ngày</h3>
+          <p>Trước đây mất 3 tháng mới cập nhật xong toàn bộ catalog. AI rút ngắn còn 2 ngày.</p>
+        </div>
+      </div>
+      <div class="card-results">
+        <div class="result-item">
+          <div class="result-val">500</div>
+          <div class="result-label">Listing viết lại</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">2 ngày</div>
+          <div class="result-label">Thời gian</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">+22%</div>
+          <div class="result-label">Traffic organic</div>
+        </div>
+      </div>
+      <div class="card-footer-row">
+        <span class="read-time">⏱ 8 phút đọc</span>
+        <span class="read-more">Đọc ngay →</span>
+      </div>
+    </a>
+
+    <a href="post.html" class="case-card">
+      <div class="card-top">
+        <div class="card-emoji">🎵</div>
+        <div class="card-info">
+          <h3>Kênh TikTok Shop từ 0 lên 50 đơn/ngày — Chỉ dùng AI viết script</h3>
+          <p>Không có ekip sáng tạo, không thuê copywriter. Tất cả script đều ra từ ChatGPT với 1 framework cố định.</p>
+        </div>
+      </div>
+      <div class="card-results">
+        <div class="result-item">
+          <div class="result-val">50</div>
+          <div class="result-label">Đơn/ngày</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">8 tuần</div>
+          <div class="result-label">Thời gian</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">0đ</div>
+          <div class="result-label">Chi phí copy</div>
+        </div>
+      </div>
+      <div class="card-footer-row">
+        <span class="read-time">⏱ 11 phút đọc</span>
+        <span class="read-more">Đọc ngay →</span>
+      </div>
+    </a>
+
+    <a href="post.html" class="case-card">
+      <div class="card-top">
+        <div class="card-emoji">🏠</div>
+        <div class="card-info">
+          <h3>Shop đồ gia dụng tự động trả lời chat khách bằng AI — Tiết kiệm 4 nhân sự</h3>
+          <p>Tỉ lệ phản hồi trong 5 phút từ 30% lên 95%. Không thuê thêm người.</p>
+        </div>
+      </div>
+      <div class="card-results">
+        <div class="result-item">
+          <div class="result-val">95%</div>
+          <div class="result-label">Phản hồi 5 phút</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">4 người</div>
+          <div class="result-label">Tiết kiệm</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">+18%</div>
+          <div class="result-label">Tỉ lệ chốt đơn</div>
+        </div>
+      </div>
+      <div class="card-footer-row">
+        <span class="read-time">⏱ 10 phút đọc</span>
+        <span class="read-more">Đọc ngay →</span>
+      </div>
+    </a>
+
+    <a href="post.html" class="case-card">
+      <div class="card-top">
+        <div class="card-emoji">💄</div>
+        <div class="card-info">
+          <h3>Brand mỹ phẩm dùng AI phân tích review để cải tiến sản phẩm mới</h3>
+          <p>Đọc 1.500 review từ đối thủ bằng AI trong 2 giờ. Tìm ra 3 pain point chưa ai giải quyết.</p>
+        </div>
+      </div>
+      <div class="card-results">
+        <div class="result-item">
+          <div class="result-val">1500</div>
+          <div class="result-label">Review phân tích</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">2 giờ</div>
+          <div class="result-label">Thời gian</div>
+        </div>
+        <div class="result-item">
+          <div class="result-val">3</div>
+          <div class="result-label">Insight mới</div>
+        </div>
+      </div>
+      <div class="card-footer-row">
+        <span class="read-time">⏱ 7 phút đọc</span>
+        <span class="read-more">Đọc ngay →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="footer-copy">© 2026 vietthuynguyen.com</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dùng ChatGPT viết 30 caption Shopee trong 15 phút | AI Ecom Vietnam</title>
+  <meta name="description" content="Hướng dẫn step-by-step dùng ChatGPT để viết caption Shopee hàng loạt — có prompt mẫu, ví dụ thực tế, áp dụng ngay.">
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg2: #1a1d27;
+      --bg3: #22263a;
+      --border: #2e3350;
+      --text: #e2e8f0;
+      --text-muted: #8892b0;
+      --accent: #7c3aed;
+      --accent2: #a855f7;
+      --accent-glow: rgba(124,58,237,0.18);
+      --radius: 12px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.75; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      font-size: 1.1rem; font-weight: 700;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--text-muted); font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-back { color: var(--accent2); font-size: .88rem; font-weight: 600; }
+    .nav-back:hover { text-decoration: underline; }
+
+    /* LAYOUT */
+    .page { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; display: grid; grid-template-columns: 1fr 300px; gap: 48px; }
+    @media (max-width: 900px) { .page { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+    /* ARTICLE */
+    .post-header { margin-bottom: 36px; }
+    .breadcrumb { color: var(--text-muted); font-size: .82rem; margin-bottom: 16px; }
+    .breadcrumb a { color: var(--accent2); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .post-tag {
+      display: inline-block;
+      background: var(--accent-glow); color: var(--accent2);
+      border: 1px solid var(--accent);
+      padding: 3px 12px; border-radius: 99px;
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 16px;
+    }
+    .post-header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800; line-height: 1.3; margin-bottom: 16px;
+    }
+    .post-meta { display: flex; gap: 20px; color: var(--text-muted); font-size: .85rem; flex-wrap: wrap; }
+    .post-meta span { display: flex; align-items: center; gap: 5px; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    /* HERO IMG */
+    .post-hero {
+      background: linear-gradient(135deg, #1e1040, #2d1b69);
+      border-radius: 16px; height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 6rem; margin-bottom: 36px;
+    }
+
+    /* CONTENT */
+    .content h2 {
+      font-size: 1.35rem; font-weight: 700;
+      margin: 40px 0 16px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .content h3 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 12px; color: var(--accent2); }
+    .content p { margin-bottom: 18px; }
+    .content ul, .content ol { padding-left: 22px; margin-bottom: 18px; }
+    .content li { margin-bottom: 8px; }
+    .content strong { color: #fff; }
+
+    /* CALLOUT */
+    .callout {
+      background: var(--accent-glow); border: 1px solid var(--accent);
+      border-left: 4px solid var(--accent2);
+      border-radius: 10px; padding: 18px 20px;
+      margin: 24px 0;
+    }
+    .callout-title { font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: #0d1117; border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px;
+      margin: 20px 0; font-family: 'Courier New', monospace;
+      font-size: .88rem; color: #a5f3fc;
+      white-space: pre-wrap; line-height: 1.7;
+      overflow-x: auto;
+    }
+    .code-label {
+      font-size: .75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 6px;
+    }
+    .copy-btn {
+      float: right; background: var(--bg3); color: var(--text-muted);
+      border: 1px solid var(--border); padding: 4px 12px;
+      border-radius: 6px; font-size: .78rem; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .copy-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* RESULT BOX */
+    .result-box {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px 22px; margin: 20px 0;
+    }
+    .result-box-title { font-weight: 700; font-size: .85rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .06em; }
+    .result-box p { color: var(--text); font-style: italic; margin-bottom: 0; }
+
+    /* CTA BOX */
+    .cta-box {
+      background: linear-gradient(135deg, var(--bg3), #1e1040);
+      border: 1px solid var(--accent);
+      border-radius: 14px; padding: 30px 28px;
+      margin: 40px 0; text-align: center;
+    }
+    .cta-box h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+    .cta-box p { color: var(--text-muted); font-size: .9rem; margin-bottom: 18px; }
+    .btn-cta {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 12px 26px; border-radius: 10px;
+      font-weight: 700; font-size: .95rem;
+      transition: background .2s;
+    }
+    .btn-cta:hover { background: var(--accent2); }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
+    .tag {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 5px 14px;
+      border-radius: 99px; font-size: .8rem;
+    }
+
+    /* RELATED */
+    .related { margin-top: 48px; }
+    .related h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 20px; }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .related-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      transition: border-color .2s;
+    }
+    .related-card:hover { border-color: var(--accent); }
+    .related-card .tag { margin-bottom: 8px; }
+    .related-card h4 { font-size: .9rem; font-weight: 700; line-height: 1.4; }
+
+    /* SIDEBAR */
+    .sidebar { position: sticky; top: 80px; align-self: start; }
+    .toc {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      margin-bottom: 24px;
+    }
+    .toc-title { font-weight: 700; font-size: .9rem; margin-bottom: 14px; }
+    .toc ul { list-style: none; padding: 0; }
+    .toc li { margin-bottom: 10px; }
+    .toc a { color: var(--text-muted); font-size: .85rem; transition: color .2s; }
+    .toc a:hover { color: var(--accent2); }
+    .sidebar-nl {
+      background: linear-gradient(135deg, var(--bg3), #1e1040);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius); padding: 22px; text-align: center;
+    }
+    .sidebar-nl h4 { font-weight: 700; margin-bottom: 8px; }
+    .sidebar-nl p { color: var(--text-muted); font-size: .83rem; margin-bottom: 16px; }
+    .sidebar-nl input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 10px 14px; border-radius: 8px;
+      font-size: .88rem; margin-bottom: 10px; outline: none;
+    }
+    .sidebar-nl input:focus { border-color: var(--accent); }
+    .sidebar-nl button {
+      width: 100%; background: var(--accent); color: #fff;
+      padding: 10px; border-radius: 8px; font-weight: 700;
+      font-size: .9rem; border: none; cursor: pointer;
+    }
+    .sidebar-nl button:hover { background: var(--accent2); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-weight: 700; }
+    .footer-copy { color: var(--text-muted); font-size: .82rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-back">← Về trang chủ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="page">
+  <article>
+    <div class="post-header">
+      <div class="breadcrumb"><a href="index.html">Trang chủ</a> / <a href="#">How-to</a> / Bài này</div>
+      <span class="post-tag">How-to</span>
+      <h1>Dùng ChatGPT viết 30 caption Shopee trong 15 phút — Bước nào cũng có ví dụ thật</h1>
+      <div class="post-meta">
+        <span>📅 12/05/2026</span>
+        <span>⏱ 7 phút đọc</span>
+        <span>✍️ Viet Thuy Nguyen</span>
+      </div>
+    </div>
+
+    <div class="post-hero">🤖</div>
+
+    <div class="content">
+      <p>Mình từng mất 2 tiếng đồng hồ mỗi sáng để viết caption cho 10 sản phẩm. Giờ cùng lượng đó mình làm trong 15 phút — và chất lượng không kém hơn.</p>
+      <p>Không phải ma thuật. Chỉ là dùng đúng cách. Bài này mình sẽ chỉ chi tiết từng bước, có prompt copy-paste được luôn.</p>
+
+      <div class="callout">
+        <div class="callout-title">⚡ Trước khi đọc</div>
+        Bạn cần có tài khoản ChatGPT (free là đủ). Không cần biết AI, không cần biết code.
+      </div>
+
+      <h2>Bước 1: Chuẩn bị thông tin sản phẩm đúng cách</h2>
+      <p>Lỗi phổ biến nhất khi dùng AI viết caption: cho AI quá ít thông tin, rồi than rằng AI viết chung chung.</p>
+      <p>Trước khi prompt, hãy chuẩn bị sẵn file ghi 4 thứ này cho từng sản phẩm:</p>
+      <ul>
+        <li><strong>Tên sản phẩm + chất liệu</strong> (VD: Áo thun Cotton 100%, bo gấu tay)</li>
+        <li><strong>Đối tượng mua</strong> (VD: nữ 18-30, thích style basic)</li>
+        <li><strong>Điểm khác biệt</strong> (VD: không xù, giặt máy được 50 lần)</li>
+        <li><strong>Giá + ưu đãi</strong> (VD: 189k, freeship đơn từ 2 áo)</li>
+      </ul>
+      <p>Mất khoảng 5 phút để điền bảng cho 10 sản phẩm. Đây là thời gian đầu tư quan trọng nhất.</p>
+
+      <h2>Bước 2: Dùng prompt "hàng loạt" này</h2>
+      <p>Đây là prompt mình đang dùng. Copy nguyên, điền thông tin vào chỗ <strong>[...]</strong>:</p>
+
+      <div class="code-label">📋 Prompt mẫu</div>
+      <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>Bạn là copywriter chuyên viết caption bán hàng Shopee cho shop thời trang nữ. Viết 5 caption khác nhau cho sản phẩm sau:
+
+Sản phẩm: [Tên + chất liệu]
+Đối tượng: [Mô tả ngắn]
+Điểm nổi bật: [2-3 điểm]
+Giá: [Giá + ưu đãi]
+
+Yêu cầu:
+- Mỗi caption 3-5 dòng
+- Mở đầu bằng hook gây tò mò hoặc nêu vấn đề
+- Có emoji phù hợp (không quá 4-5 cái)
+- Kết bằng CTA rõ ràng (nhắn tin, đặt hàng...)
+- Tone: gần gũi, như bạn bè chia sẻ — không quảng cáo cứng</div>
+
+      <h3>Ví dụ thực tế:</h3>
+
+      <div class="code-label">✏️ Input mình điền vào</div>
+      <div class="code-block">Sản phẩm: Áo thun Cotton 100%, bo gấu tay, có cổ tròn
+Đối tượng: Nữ 18-30, thích mặc thoải mái đi học, đi cafe
+Điểm nổi bật: Không xù sau 50 lần giặt, màu bền, form body vừa vặn
+Giá: 189.000đ, freeship đơn từ 2 áo</div>
+
+      <div class="result-box">
+        <div class="result-box-title">💬 Output của ChatGPT (caption 1 trong 5)</div>
+        <p>Mặc đi học 3 năm mà vẫn như mới mua 🙈<br><br>
+        Cái áo này mình giặt máy cả trăm lần rồi — vải vẫn mềm, màu vẫn đẹp, không có sợi nào bị xù. Cotton 100% thoáng mát, form vừa người không bị rộng thùng thình.<br><br>
+        189k cho 1 áo mặc được cả năm không lo hỏng 💙<br>
+        👉 Inbox shop để chọn màu nha, còn nhiều size!</p>
+      </div>
+
+      <p>5 caption ra ngay trong 30 giây. Mình thường dùng 2-3 cái, còn lại để đăng kỳ tới.</p>
+
+      <h2>Bước 3: Chạy hàng loạt 30 sản phẩm cùng lúc</h2>
+      <p>Đây mới là phần tiết kiệm thời gian thực sự. Thay vì prompt từng sản phẩm một, dùng cách này:</p>
+
+      <div class="code-label">📋 Prompt hàng loạt</div>
+      <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>Tôi có [N] sản phẩm. Với mỗi sản phẩm, viết 3 caption theo format trên.
+Trả lời theo format:
+
+=== SẢN PHẨM 1: [Tên] ===
+Caption 1: ...
+Caption 2: ...
+Caption 3: ...
+
+=== SẢN PHẨM 2: [Tên] ===
+...
+
+Danh sách sản phẩm:
+1. [Tên | Đối tượng | Điểm nổi bật | Giá]
+2. [...]
+3. [...]</div>
+
+      <p>ChatGPT sẽ chạy tuần tự, ra 90 caption cho 30 sản phẩm trong khoảng 3-5 phút. Bạn chỉ cần ngồi chờ và chọn cái nào dùng.</p>
+
+      <div class="callout">
+        <div class="callout-title">💡 Mẹo tăng chất lượng</div>
+        Sau khi có output, thêm prompt: <em>"Viết lại caption số 2 cho sản phẩm 1 — mạnh hơn, có số liệu cụ thể hơn, hook sắc hơn."</em> ChatGPT sẽ tập trung cải thiện đúng chỗ bạn muốn.
+      </div>
+
+      <h2>Kết quả thực tế của mình</h2>
+      <ul>
+        <li>Trước: 2 tiếng/ngày để viết 10-15 caption</li>
+        <li>Sau: 15 phút để viết 30 caption</li>
+        <li>Chất lượng: tương đương, thỉnh thoảng AI ra ý hay hơn mình nghĩ</li>
+      </ul>
+      <p>Thời gian tiết kiệm được mình dùng để chạy ads và chăm sóc khách hàng — 2 việc có ảnh hưởng trực tiếp hơn đến doanh thu.</p>
+
+      <div class="cta-box">
+        <h3>📥 Tải template bảng thông tin sản phẩm</h3>
+        <p>File Google Sheets để điền nhanh 4 thông tin cần thiết cho mỗi sản phẩm trước khi prompt.</p>
+        <a href="#" class="btn-cta">Tải miễn phí →</a>
+      </div>
+
+      <div class="tags">
+        <span class="tag">#ChatGPT</span>
+        <span class="tag">#Shopee</span>
+        <span class="tag">#ViếtContent</span>
+        <span class="tag">#AIBánHàng</span>
+        <span class="tag">#TiếtKiệmThờiGian</span>
+      </div>
+
+      <div class="related">
+        <h3>📚 Đọc tiếp</h3>
+        <div class="related-grid">
+          <a href="#" class="related-card">
+            <span class="post-tag">How-to</span>
+            <h4>AI viết mô tả sản phẩm Shopee chuẩn SEO — Không cần biết SEO vẫn làm được</h4>
+          </a>
+          <a href="#" class="related-card">
+            <span class="post-tag">How-to</span>
+            <h4>Tạo script TikTok bán hàng bằng AI — 60 giây video, 3 phút chuẩn bị</h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="toc">
+      <div class="toc-title">📋 Nội dung bài</div>
+      <ul>
+        <li><a href="#">Bước 1: Chuẩn bị thông tin sản phẩm</a></li>
+        <li><a href="#">Bước 2: Prompt hàng loạt</a></li>
+        <li><a href="#">Bước 3: Chạy 30 sản phẩm cùng lúc</a></li>
+        <li><a href="#">Kết quả thực tế</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-nl">
+      <h4>📬 Nhận bài mới mỗi sáng</h4>
+      <p>1 tip AI thực chiến mỗi ngày</p>
+      <form onsubmit="handleSub(event)">
+        <input type="email" placeholder="Email của bạn..." required>
+        <button type="submit">Đăng ký miễn phí</button>
+      </form>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">⚡ AI Ecom Vietnam</a>
+    <div class="footer-copy">© 2026 vietthuynguyen.com</div>
+  </div>
+</footer>
+
+<script>
+  function copyCode(btn) {
+    const block = btn.parentElement;
+    const text = block.textContent.replace('Copy', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Đã copy!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  }
+  function handleSub(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = '✅ Đã đăng ký!';
+    btn.style.background = '#10b981';
+  }
+</script>
+</body>
+</html>

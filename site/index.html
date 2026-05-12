@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Ecom Vietnam — Thực chiến AI cho seller Việt</title>
+  <meta name="description" content="Hướng dẫn thực chiến dùng AI để tăng doanh thu Shopee, TikTok Shop, Facebook — dành cho seller Việt Nam.">
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg2: #1a1d27;
+      --bg3: #22263a;
+      --border: #2e3350;
+      --text: #e2e8f0;
+      --text-muted: #8892b0;
+      --accent: #7c3aed;
+      --accent2: #a855f7;
+      --accent-glow: rgba(124,58,237,0.18);
+      --green: #10b981;
+      --orange: #f59e0b;
+      --radius: 12px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .logo {
+      font-size: 1.1rem; font-weight: 700;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--text-muted); font-size: .9rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: 8px 18px; border-radius: 8px;
+      font-weight: 600; font-size: .85rem;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px; margin: 0 auto;
+      padding: 90px 24px 60px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-glow); border: 1px solid var(--accent);
+      color: var(--accent2); padding: 6px 16px;
+      border-radius: 99px; font-size: .82rem; font-weight: 600;
+      margin-bottom: 28px;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 1.6s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 580px; margin: 0 auto 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      padding: 14px 28px; border-radius: var(--radius);
+      font-weight: 700; font-size: 1rem;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 0 0 rgba(124,58,237,0);
+    }
+    .btn-primary:hover {
+      background: var(--accent2); transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124,58,237,.35);
+    }
+    .btn-secondary {
+      background: var(--bg3); color: var(--text);
+      padding: 14px 28px; border-radius: var(--radius);
+      font-weight: 600; font-size: 1rem;
+      border: 1px solid var(--border);
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* ── STATS ── */
+    .stats {
+      max-width: 1100px; margin: 0 auto 70px;
+      padding: 0 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .stat-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      text-align: center;
+    }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent2); }
+    .stat-label { font-size: .85rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* ── SECTION TITLE ── */
+    .section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 24px 70px;
+    }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .section-title { font-size: 1.4rem; font-weight: 700; }
+    .see-all { color: var(--accent2); font-size: .9rem; font-weight: 600; }
+    .see-all:hover { text-decoration: underline; }
+
+    /* ── FEATURED POST ── */
+    .featured-post {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin-bottom: 50px;
+      transition: border-color .2s, transform .2s;
+    }
+    .featured-post:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .featured-img {
+      background: linear-gradient(135deg, #1e1040, #2d1b69);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 260px; font-size: 5rem;
+    }
+    .featured-body { padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; }
+    .post-tag {
+      display: inline-block;
+      background: var(--accent-glow); color: var(--accent2);
+      border: 1px solid var(--accent);
+      padding: 3px 12px; border-radius: 99px;
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 14px;
+    }
+    .featured-body h2 {
+      font-size: 1.5rem; font-weight: 700; line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .featured-body p { color: var(--text-muted); margin-bottom: 20px; }
+    .post-meta { display: flex; gap: 16px; color: var(--text-muted); font-size: .82rem; }
+    .post-meta span { display: flex; align-items: center; gap: 5px; }
+
+    /* ── POST GRID ── */
+    .post-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .post-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color .2s, transform .2s;
+      cursor: pointer;
+    }
+    .post-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .card-img {
+      background: linear-gradient(135deg, #1a1040, #2a1560);
+      height: 140px; display: flex; align-items: center;
+      justify-content: center; font-size: 3rem;
+    }
+    .card-img.green { background: linear-gradient(135deg, #0d2b1e, #0f4f35); }
+    .card-img.orange { background: linear-gradient(135deg, #2b1a04, #5c3710); }
+    .card-img.blue { background: linear-gradient(135deg, #0d1f3c, #0f3875); }
+    .card-body { padding: 20px; }
+    .card-body h3 { font-size: 1rem; font-weight: 700; line-height: 1.45; margin-bottom: 10px; }
+    .card-body p { color: var(--text-muted); font-size: .85rem; line-height: 1.6; margin-bottom: 14px; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; }
+    .read-time { color: var(--text-muted); font-size: .78rem; }
+    .read-more { color: var(--accent2); font-size: .82rem; font-weight: 600; }
+
+    /* ── TOPICS ── */
+    .topics-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    .topic-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      text-align: center; cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .topic-card:hover { border-color: var(--accent); background: var(--accent-glow); }
+    .topic-icon { font-size: 2rem; margin-bottom: 10px; }
+    .topic-name { font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+    .topic-count { color: var(--text-muted); font-size: .8rem; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .newsletter-box {
+      background: linear-gradient(135deg, var(--bg3), #1e1040);
+      border: 1px solid var(--accent);
+      border-radius: 20px; padding: 50px 40px;
+      text-align: center;
+    }
+    .newsletter-box h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
+    .newsletter-box p { color: var(--text-muted); margin-bottom: 28px; }
+    .nl-form { display: flex; gap: 12px; max-width: 460px; margin: 0 auto; }
+    .nl-form input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 13px 18px; border-radius: 10px;
+      font-size: .95rem; outline: none;
+      transition: border-color .2s;
+    }
+    .nl-form input:focus { border-color: var(--accent); }
+    .nl-form button {
+      background: var(--accent); color: #fff;
+      padding: 13px 22px; border-radius: 10px;
+      font-weight: 700; font-size: .95rem; border: none;
+      cursor: pointer; white-space: nowrap;
+      transition: background .2s;
+    }
+    .nl-form button:hover { background: var(--accent2); }
+    .nl-note { color: var(--text-muted); font-size: .8rem; margin-top: 12px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-weight: 700; font-size: 1.05rem; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--text-muted); font-size: .88rem; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--text-muted); font-size: .82rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-img { min-height: 180px; }
+      .post-grid { grid-template-columns: 1fr; }
+      .topics-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats { grid-template-columns: repeat(3, 1fr); }
+      .nl-form { flex-direction: column; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="nav-links">
+      <a href="how-to.html">How-to</a>
+      <a href="case-study.html">Case Study</a>
+      <a href="tools.html">Tools</a>
+      <a href="about.html">Về mình</a>
+      <a href="#newsletter" class="nav-cta">Nhận bài mới</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span></span> Cập nhật hàng ngày · Thực chiến · Không lý thuyết
+  </div>
+  <h1>Dùng AI để <em>bán hàng tốt hơn</em><br>trên Shopee, TikTok, Facebook</h1>
+  <p class="hero-sub">
+    Hướng dẫn thực tế từ người đang vận hành shop — không phải từ giảng viên.
+    Mỗi bài là 1 tác vụ cụ thể bạn có thể làm ngay hôm nay.
+  </p>
+  <div class="hero-actions">
+    <a href="#latest" class="btn-primary">📖 Đọc bài mới nhất</a>
+    <a href="#topics" class="btn-secondary">🗂 Xem theo chủ đề</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Bài hướng dẫn thực chiến</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Sàn TMĐT được cover</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">0đ</div>
+    <div class="stat-label">Hoàn toàn miễn phí</div>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<section class="section" id="latest">
+  <div class="section-header">
+    <h2 class="section-title">🔥 Bài nổi bật</h2>
+    <a href="#" class="see-all">Xem tất cả →</a>
+  </div>
+  <a href="post.html" class="featured-post">
+    <div class="featured-img">🤖</div>
+    <div class="featured-body">
+      <span class="post-tag">How-to</span>
+      <h2>Dùng ChatGPT viết 30 caption Shopee trong 15 phút — Bước nào cũng có ví dụ thật</h2>
+      <p>Hầu hết seller mất 1-2 tiếng để viết caption cho 1 buổi đăng hàng. Có cách làm nhanh hơn 10 lần mà chất lượng không kém.</p>
+      <div class="post-meta">
+        <span>📅 12/05/2026</span>
+        <span>⏱ 7 phút đọc</span>
+        <span>👁 1.2k lượt xem</span>
+      </div>
+    </div>
+  </a>
+</section>
+
+<!-- POST GRID -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">📚 Bài viết mới nhất</h2>
+    <a href="#" class="see-all">Xem tất cả →</a>
+  </div>
+  <div class="post-grid">
+    <a href="post.html" class="post-card">
+      <div class="card-img green">🛍️</div>
+      <div class="card-body">
+        <span class="post-tag">How-to</span>
+        <h3>AI viết mô tả sản phẩm Shopee chuẩn SEO — Không cần biết SEO vẫn làm được</h3>
+        <p>Công thức prompt giúp AI tạo listing đủ keyword, đúng format Shopee, không bị filter.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 5 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+    <a href="post.html" class="post-card">
+      <div class="card-img orange">📊</div>
+      <div class="card-body">
+        <span class="post-tag">Case Study</span>
+        <h3>Shop thời trang 5 người dùng AI phân tích đối thủ — Tăng 40% đơn sau 6 tuần</h3>
+        <p>Cách họ dùng ChatGPT để đọc 200 review đối thủ và tìm ra lỗ hổng thị trường.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 9 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+    <a href="post.html" class="post-card">
+      <div class="card-img blue">🎵</div>
+      <div class="card-body">
+        <span class="post-tag">How-to</span>
+        <h3>Tạo script TikTok bán hàng bằng AI — 60 giây video, 3 phút chuẩn bị</h3>
+        <p>Framework hook-value-CTA kết hợp với AI để ra script TikTok Shop không cần sáng tạo từ đầu.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 6 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section class="section" id="topics">
+  <div class="section-header">
+    <h2 class="section-title">🗂 Chủ đề</h2>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card">
+      <div class="topic-icon">🛒</div>
+      <div class="topic-name">Shopee</div>
+      <div class="topic-count">18 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🎵</div>
+      <div class="topic-name">TikTok Shop</div>
+      <div class="topic-count">12 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📝</div>
+      <div class="topic-name">Viết Content</div>
+      <div class="topic-count">15 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📈</div>
+      <div class="topic-name">Phân tích Data</div>
+      <div class="topic-count">8 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🤖</div>
+      <div class="topic-name">AI Tools</div>
+      <div class="topic-count">10 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">⚙️</div>
+      <div class="topic-name">Tự động hóa</div>
+      <div class="topic-count">7 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <div class="topic-name">Quảng cáo Ads</div>
+      <div class="topic-count">9 bài</div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📦</div>
+      <div class="topic-name">Case Study</div>
+      <div class="topic-count">6 bài</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter" id="newsletter">
+  <div class="newsletter-box">
+    <h2>📬 Nhận bài mới mỗi sáng</h2>
+    <p>1 bài thực chiến/ngày. Đọc trong 5-10 phút. Áp dụng ngay vào shop.</p>
+    <form class="nl-form" onsubmit="handleSubscribe(event)">
+      <input type="email" placeholder="Email của bạn..." required>
+      <button type="submit">Đăng ký miễn phí</button>
+    </form>
+    <p class="nl-note">Không spam. Hủy đăng ký bất cứ lúc nào.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">⚡ AI Ecom Vietnam</div>
+    <div class="footer-links">
+      <a href="#">How-to</a>
+      <a href="#">Case Study</a>
+      <a href="#">Tools</a>
+      <a href="#">Về mình</a>
+    </div>
+    <div class="footer-copy">© 2026 vietthuynguyen.com</div>
+  </div>
+</footer>
+
+<script>
+  function handleSubscribe(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = '✅ Đã đăng ký!';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = 'Đăng ký miễn phí';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>

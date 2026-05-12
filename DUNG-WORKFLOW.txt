@@ -1,0 +1,63 @@
+========================================
+HƯỚNG DẪN DÙNG AUTO-PUBLISH WORKFLOW
+========================================
+
+CÁCH HOẠT ĐỘNG
+--------------
+1. Claude viết bài → lưu vào posts/ready/
+2. Bạn xem qua bài trong posts/ready/
+3. Chạy lệnh bên dưới → bài tự động lên GitHub Pages
+4. Bài được move sang posts/published/ để lưu trữ
+
+========================================
+BƯỚC 1: Cài Git (nếu chưa có)
+========================================
+Tải Git tại: https://git-scm.com/download/win
+Cài xong, mở lại terminal.
+
+========================================
+BƯỚC 2: Chạy script đăng bài
+========================================
+Mở Terminal (Command Prompt hoặc PowerShell):
+
+  cd C:\Users\kratos\Documents\Claude\Projects\blogcanhan
+  python auto-publish.py
+
+Script sẽ:
+- Tìm tất cả file trong posts/ready/
+- Hỏi bạn có muốn đăng không
+- Tự động push lên GitHub → live sau ~30 giây
+
+========================================
+CÁCH YÊU CẦU CLAUDE VIẾT BÀI
+========================================
+Trong chat Cowork, nói với Claude:
+
+  "Viết bài về [topic] cho blog"
+
+Claude sẽ:
+1. Research topic
+2. Viết draft hoàn chỉnh với đúng tone/format
+3. Lưu vào posts/ready/ với tên file chuẩn
+4. Báo bạn xem và chạy auto-publish.py
+
+========================================
+CẤU TRÚC FILE BÀI VIẾT (.md)
+========================================
+Mỗi bài viết bắt đầu bằng:
+
+---
+title: "Tiêu đề bài viết"
+description: "Mô tả 150-160 ký tự cho SEO"
+keyword: "keyword target"
+---
+
+[Nội dung bài viết bằng Markdown]
+
+========================================
+LƯU Ý
+========================================
+- Token GitHub đã được cấu hình sẵn trong auto-publish.py
+- Bài sau khi đăng sẽ live tại:
+  https://vietthuyfu.github.io/vietthuynguyen.com/[ten-bai].html
+- Bài đã đăng được lưu trong posts/published/

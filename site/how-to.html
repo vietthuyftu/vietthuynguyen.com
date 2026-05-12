@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How-to — Hướng dẫn dùng AI bán hàng | AI Ecom Vietnam</title>
+  <meta name="description" content="Tổng hợp hướng dẫn thực chiến dùng AI cho Shopee, TikTok Shop, Facebook — từng bước, có ví dụ thật.">
+  <style>
+    :root {
+      --bg: #0f1117; --bg2: #1a1d27; --bg3: #22263a;
+      --border: #2e3350; --text: #e2e8f0; --text-muted: #8892b0;
+      --accent: #7c3aed; --accent2: #a855f7;
+      --accent-glow: rgba(124,58,237,0.18);
+      --radius: 12px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .logo {
+      font-size: 1.1rem; font-weight: 700;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--text-muted); font-size: .9rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: .85rem;
+    }
+
+    .page-header {
+      max-width: 1100px; margin: 0 auto; padding: 60px 24px 40px;
+    }
+    .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 12px; }
+    .page-header p { color: var(--text-muted); font-size: 1.05rem; max-width: 560px; }
+
+    /* FILTER TABS */
+    .filter-bar {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 32px;
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 8px 18px;
+      border-radius: 99px; font-size: .85rem; cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent-glow); border-color: var(--accent); color: var(--accent2);
+    }
+
+    /* POST LIST */
+    .posts-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+    .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+    .post-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .post-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .card-img {
+      height: 140px; display: flex; align-items: center;
+      justify-content: center; font-size: 3rem;
+    }
+    .grad-1 { background: linear-gradient(135deg, #1e1040, #2d1b69); }
+    .grad-2 { background: linear-gradient(135deg, #0d2b1e, #0f4f35); }
+    .grad-3 { background: linear-gradient(135deg, #2b1a04, #5c3710); }
+    .grad-4 { background: linear-gradient(135deg, #0d1f3c, #0f3875); }
+    .grad-5 { background: linear-gradient(135deg, #2b0d1e, #5c0f35); }
+    .card-body { padding: 20px; }
+    .post-tag {
+      display: inline-block;
+      background: var(--accent-glow); color: var(--accent2);
+      border: 1px solid var(--accent);
+      padding: 2px 10px; border-radius: 99px;
+      font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px;
+    }
+    .tag-shopee { background: rgba(238,77,45,.12); color: #f87171; border-color: #f87171; }
+    .tag-tiktok { background: rgba(0,0,0,.3); color: #94a3b8; border-color: #475569; }
+    .tag-content { background: rgba(16,185,129,.12); color: #34d399; border-color: #34d399; }
+    .tag-ads { background: rgba(245,158,11,.12); color: #fbbf24; border-color: #fbbf24; }
+    .card-body h3 { font-size: .98rem; font-weight: 700; line-height: 1.45; margin-bottom: 10px; }
+    .card-body p { color: var(--text-muted); font-size: .83rem; line-height: 1.6; margin-bottom: 14px; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; }
+    .read-time { color: var(--text-muted); font-size: .78rem; }
+    .read-more { color: var(--accent2); font-size: .82rem; font-weight: 600; }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex; justify-content: center; gap: 8px; margin-top: 48px;
+    }
+    .page-btn {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--text-muted); padding: 8px 16px; border-radius: 8px;
+      font-size: .88rem; cursor: pointer; transition: all .2s;
+    }
+    .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .page-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent2); }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { color: var(--text-muted); font-size: .82rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .posts-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+      .posts-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="nav-links">
+      <a href="how-to.html" class="active">How-to</a>
+      <a href="case-study.html">Case Study</a>
+      <a href="tools.html">Tools</a>
+      <a href="about.html">Về mình</a>
+      <a href="#" class="nav-cta">Nhận bài mới</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>📖 How-to & Hướng dẫn</h1>
+  <p>Mỗi bài là 1 task cụ thể bạn có thể làm ngay — không có lý thuyết thừa.</p>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active">Tất cả</button>
+  <button class="filter-btn">🛒 Shopee</button>
+  <button class="filter-btn">🎵 TikTok Shop</button>
+  <button class="filter-btn">📝 Viết content</button>
+  <button class="filter-btn">💰 Chạy ads</button>
+  <button class="filter-btn">⚙️ Tự động hóa</button>
+  <button class="filter-btn">📊 Phân tích data</button>
+</div>
+
+<div class="posts-wrap">
+  <div class="posts-grid">
+
+    <a href="post.html" class="post-card">
+      <div class="card-img grad-1">🤖</div>
+      <div class="card-body">
+        <span class="post-tag tag-content">Viết content</span>
+        <h3>Dùng ChatGPT viết 30 caption Shopee trong 15 phút</h3>
+        <p>Prompt hàng loạt giúp bạn có đủ caption cho cả tuần mà không cần ngồi nghĩ từng cái.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 7 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="post.html" class="post-card">
+      <div class="card-img grad-2">🛒</div>
+      <div class="card-body">
+        <span class="post-tag tag-shopee">Shopee</span>
+        <h3>AI viết mô tả sản phẩm Shopee chuẩn SEO — Không cần biết SEO vẫn làm được</h3>
+        <p>Prompt tạo listing đủ keyword, đúng format Shopee, không bị filter thuật toán.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 5 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="post.html" class="post-card">
+      <div class="card-img grad-4">🎵</div>
+      <div class="card-body">
+        <span class="post-tag tag-tiktok">TikTok Shop</span>
+        <h3>Tạo script TikTok bán hàng bằng AI — 60 giây video, 3 phút chuẩn bị</h3>
+        <p>Framework Hook-Value-CTA kết hợp AI để ra script không cần sáng tạo từ đầu.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 6 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="post.html" class="post-card">
+      <div class="card-img grad-3">💬</div>
+      <div class="card-body">
+        <span class="post-tag tag-shopee">Shopee</span>
+        <h3>Dùng AI trả lời review 1 sao — Biến khách chê thành khách quay lại</h3>
+        <p>Template phản hồi review tiêu cực theo từng tình huống: giao hàng chậm, sai size, hàng lỗi...</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 4 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="post.html" class="post-card">
+      <div class="card-img grad-5">📊</div>
+      <div class="card-body">
+        <span class="post-tag tag-ads">Chạy ads</span>
+        <h3>Dùng AI phân tích quảng cáo Facebook Ads — Biết ngay cái nào đang lãng phí tiền</h3>
+        <p>Copy data từ Ads Manager, dán vào ChatGPT, nhận phân tích và gợi ý tắt/scale ngay.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 8 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="post.html" class="post-card">
+      <div class="card-img grad-1">⚙️</div>
+      <div class="card-body">
+        <span class="post-tag">Tự động hóa</span>
+        <h3>Tự động gửi tin nhắn chăm sóc khách sau khi mua — Không cần làm tay</h3>
+        <p>Setup workflow gửi tin nhắn cảm ơn + upsell tự động sau khi đơn hoàn thành trên Shopee.</p>
+        <div class="card-footer">
+          <span class="read-time">⏱ 10 phút đọc</span>
+          <span class="read-more">Đọc ngay →</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="pagination">
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <button class="page-btn">→</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="footer-copy">© 2026 vietthuynguyen.com</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
