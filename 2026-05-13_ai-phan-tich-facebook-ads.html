@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dùng AI Phân Tích Facebook Ads — Biết Ngay Cái Nào Đang Lãng Phí Tiền | AI Ecom Vietnam</title>
+  <meta name="description" content="Copy data từ Ads Manager, dán vào ChatGPT, nhận phân tích và gợi ý tắt/scale ngay trong 5 phút.">
+  <style>
+    :root {
+      --bg:#0f1117;--bg2:#1a1d27;--bg3:#22263a;--border:#2e3350;
+      --text:#e2e8f0;--text-muted:#8892b0;--accent:#7c3aed;--accent2:#a855f7;
+      --accent-glow:rgba(124,58,237,0.18);--radius:12px;
+      --font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.75}
+    a{color:inherit;text-decoration:none}
+    nav{position:sticky;top:0;z-index:100;background:rgba(15,17,23,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .logo{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,#a855f7,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-back{color:var(--accent2);font-size:.88rem;font-weight:600}
+    .page{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+    .breadcrumb{color:var(--text-muted);font-size:.82rem;margin-bottom:16px}
+    .breadcrumb a{color:var(--accent2)}
+    .post-tag{display:inline-block;background:var(--accent-glow);color:var(--accent2);border:1px solid var(--accent);padding:3px 12px;border-radius:99px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px}
+    h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;line-height:1.3;margin-bottom:16px}
+    .post-meta{display:flex;gap:20px;color:var(--text-muted);font-size:.85rem;margin-bottom:32px;flex-wrap:wrap}
+    .post-hero{background:linear-gradient(135deg,#1e1040,#2d1b69);border-radius:16px;height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;margin-bottom:36px}
+    h2{font-size:1.3rem;font-weight:700;margin:36px 0 14px;padding-top:8px;border-top:1px solid var(--border)}
+    h3{font-size:1.05rem;font-weight:700;margin:24px 0 10px;color:var(--accent2)}
+    p{margin-bottom:16px;color:var(--text)}
+    li{margin-bottom:8px;margin-left:20px;color:var(--text)}
+    .code-block{background:#0d1117;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:18px 0;font-family:'Courier New',monospace;font-size:.87rem;color:#a5f3fc;white-space:pre-wrap;line-height:1.7}
+    .callout{background:var(--accent-glow);border:1px solid var(--accent);border-left:4px solid var(--accent2);border-radius:10px;padding:16px 18px;margin:20px 0}
+    strong{color:#fff}
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-muted);font-size:.82rem}
+    @media(max-width:600px){.page{padding:32px 16px 60px}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <a href="how-to.html" class="nav-back">← Quay lại</a>
+  </div>
+</nav>
+<div class="page">
+  <div class="breadcrumb"><a href="index.html">Trang chủ</a> / <a href="how-to.html">How-to</a> / Bài này</div>
+  <span class="post-tag">How-to</span>
+  <h1>Dùng AI Phân Tích Facebook Ads — Biết Ngay Cái Nào Đang Lãng Phí Tiền</h1>
+  <div class="post-meta">
+    <span>📅 12/05/2026</span>
+    <span>✍️ Viet Thuy Nguyen</span>
+  </div>
+  <div class="post-hero">🤖</div>
+  <div class="content">
+<p>Bạn đang chạy 5–10 chiến dịch cùng lúc. Nhìn vào Ads Manager thấy một đống số — CPM, CPC, CTR, ROAS — nhưng không biết cái nào cần tắt, cái nào nên tăng budget.</p>
+
+<p>Bài này hướng dẫn bạn dùng AI để đọc và phân tích toàn bộ data Ads Manager trong vòng 5 phút, ra quyết định luôn mà không cần thuê chuyên gia.</p>
+
+<h2>Tại sao không tự đọc data được?</h2>
+
+<p>Vấn đề không phải bạn không biết đọc số. Vấn đề là:</p>
+
+<li>Quá nhiều chỉ số, không biết ưu tiên cái nào</li>
+<li>Không có benchmark để so sánh (CTR bao nhiêu là tốt cho ngành mình?)</li>
+<li>Dễ bị confirmation bias — nhìn vào số mình muốn thấy, bỏ qua số xấu</li>
+
+<p>AI không có cảm xúc. Nó đọc thẳng và nói thẳng.</p>
+
+<h2>Chuẩn bị: Export data từ Ads Manager</h2>
+
+<p><strong>Bước 1:</strong> Vào Facebook Ads Manager → chọn khoảng thời gian 7 hoặc 14 ngày gần nhất</p>
+
+<p><strong>Bước 2:</strong> Chọn cột hiển thị — đảm bảo có đủ:</p>
+<li>Tên chiến dịch / ad set / ad</li>
+<li>Ngân sách</li>
+<li>Chi phí</li>
+<li>Lượt hiển thị, Reach</li>
+<li>CTR (tỷ lệ nhấp)</li>
+<li>CPC (chi phí mỗi lần nhấp)</li>
+<li>CPM (chi phí mỗi 1.000 hiển thị)</li>
+<li>ROAS (nếu có cài Pixel và sự kiện mua hàng)</li>
+<li>Số đơn / doanh thu (nếu theo dõi được)</li>
+
+<p><strong>Bước 3:</strong> Export ra CSV hoặc đơn giản hơn — <strong>copy bảng trực tiếp</strong> từ Ads Manager (Ctrl+A → Ctrl+C)</p>
+
+<div class="callout"><p>Không cần export file. Copy bảng thẳng vào ChatGPT là đủ.</p></div>
+
+<h2>Prompt phân tích tổng quan</h2>
+
+<p>Dán data vào ChatGPT kèm prompt này:</p>
+
+<div class="code-block">
+Đây là data Facebook Ads của mình trong 14 ngày qua:
+
+[DÁN DATA VÀO ĐÂY]
+
+Hãy phân tích và cho mình biết:
+1. Chiến dịch / ad set nào đang hoạt động tốt nhất? (dựa trên ROAS hoặc CPC thấp + CTR cao)
+2. Chiến dịch / ad set nào đang lãng phí tiền? (chi nhiều, kết quả kém)
+3. Gợi ý cụ thể: cái nào nên tắt, cái nào nên tăng budget, cái nào cần test lại creative?
+4. Nếu tổng budget hiện tại là [X triệu/ngày], phân bổ lại như thế nào cho tối ưu?
+
+Trả lời ngắn gọn, có số liệu cụ thể, không giải thích lý thuyết.
+</div>
+
+<h2>Prompt phân tích creative (ad nào đang chạy tốt)</h2>
+
+<p>Nếu bạn đang chạy nhiều mẫu quảng cáo khác nhau và muốn biết mẫu nào đang thắng:</p>
+
+<div class="code-block">
+Đây là data các mẫu quảng cáo (ad level) của mình:
+
+[DÁN DATA AD LEVEL]
+
+Phân tích:
+1. Mẫu nào có CTR cao nhất? Lý do có thể là gì (hook, hình ảnh, offer)?
+2. Mẫu nào có CPC thấp nhất với volume đủ lớn (>1000 impression)?
+3. Nếu chỉ giữ lại 2-3 mẫu để scale, giữ mẫu nào?
+4. Mẫu nào nên dừng ngay?
+</div>
+
+<h2>Đọc kết quả và ra quyết định</h2>
+
+<p>AI sẽ trả về phân tích dạng này:</p>
+
+<div class="callout"><p>"Ad set A: CTR 3.2%, CPC 1.200đ — đang tốt, nên tăng budget 20-30%</p></div>
+<div class="callout"><p>Ad set B: CTR 0.8%, CPC 8.500đ — hiệu quả kém so với trung bình ngành, nên tắt hoặc đổi audience</p></div>
+<div class="callout"><p>Ad set C: ROAS 4.2x — dưới break-even nếu margin < 30%, xem lại offer hoặc landing page"</p></div>
+
+<p><strong>Benchmark tham khảo cho ngành thời trang / phụ kiện Việt Nam:</strong></p>
+<li>CTR tốt: > 2%</li>
+<li>CPC ổn: < 2.000đ (traffic) / < 5.000đ (conversion)</li>
+<li>ROAS tối thiểu để có lời: tùy margin, thường cần > 3x nếu margin 30–40%</li>
+
+<div class="callout"><p>Benchmark này chỉ mang tính tham khảo. Số thực của shop bạn phụ thuộc vào ngành hàng, giá sản phẩm, và chất lượng landing page.</p></div>
+
+<h2>Làm mỗi tuần, không cần thuê agency</h2>
+
+<p>Workflow đơn giản:</p>
+
+<li>**Thứ 2:** Export data 7 ngày → chạy prompt phân tích tổng quan</li>
+<li>**Thứ 4:** Kiểm tra lại sau điều chỉnh → tắt/scale theo gợi ý AI</li>
+<li>**Thứ 6:** Phân tích creative → quyết định test mẫu mới tuần sau</li>
+
+<p>Tổng thời gian: 20–30 phút/tuần. Thay thế được ít nhất 2–3 giờ ngồi nhìn chằm chằm vào Ads Manager mà không ra quyết định.</p>
+
+<h2>Giới hạn của cách này</h2>
+
+<p>AI phân tích dựa trên số bạn đưa vào. Nếu Pixel chưa cài đúng, dữ liệu conversion thiếu thì kết quả phân tích cũng kém chính xác. Ưu tiên cài Pixel và theo dõi sự kiện Purchase trước khi chạy ads quy mô lớn.</p>
+
+<p>Thử ngay với data tuần này — dán vào ChatGPT và xem nó nói cái nào cần tắt. Kết quả thường khác với cảm tính của bạn.</p>
+  </div>
+</div>
+<footer>© 2026 vietthuynguyen.com</footer>
+</body>
+</html>
