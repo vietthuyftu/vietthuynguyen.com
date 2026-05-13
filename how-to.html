@@ -92,6 +92,7 @@
     .tag-tiktok { background: rgba(0,0,0,.3); color: #94a3b8; border-color: #475569; }
     .tag-content { background: rgba(16,185,129,.12); color: #34d399; border-color: #34d399; }
     .tag-ads { background: rgba(245,158,11,.12); color: #fbbf24; border-color: #fbbf24; }
+    .tag-automation { background: rgba(124,58,237,.15); color: #a78bfa; border-color: #7c3aed; }
     .card-body h3 { font-size: .98rem; font-weight: 700; line-height: 1.45; margin-bottom: 10px; }
     .card-body p { color: var(--text-muted); font-size: .83rem; line-height: 1.6; margin-bottom: 14px; }
     .card-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -156,7 +157,7 @@
 <div class="posts-wrap">
   <div class="posts-grid">
 
-    <a href="2026-05-12_huong-dan-dung-chatgpt-viet-caption-shopee.html" class="post-card">
+    <a href="2026-05-12_huong-dan-dung-chatgpt-viet-caption-shopee.html" class="post-card" data-tags="content shopee">
       <div class="card-img grad-1">🤖</div>
       <div class="card-body">
         <span class="post-tag tag-content">Viết content</span>
@@ -169,7 +170,7 @@
       </div>
     </a>
 
-    <a href="2026-05-12_ai-viet-mo-ta-san-pham-shopee-chuan-seo.html" class="post-card">
+    <a href="2026-05-12_ai-viet-mo-ta-san-pham-shopee-chuan-seo.html" class="post-card" data-tags="shopee content">
       <div class="card-img grad-2">🛒</div>
       <div class="card-body">
         <span class="post-tag tag-shopee">Shopee</span>
@@ -182,7 +183,7 @@
       </div>
     </a>
 
-    <a href="2026-05-12_ai-viet-script-tiktok-ban-hang.html" class="post-card">
+    <a href="2026-05-12_ai-viet-script-tiktok-ban-hang.html" class="post-card" data-tags="tiktok content">
       <div class="card-img grad-4">🎵</div>
       <div class="card-body">
         <span class="post-tag tag-tiktok">TikTok Shop</span>
@@ -195,7 +196,7 @@
       </div>
     </a>
 
-    <a href="2026-05-12_ai-phan-tich-doi-thu-shopee.html" class="post-card">
+    <a href="2026-05-12_ai-phan-tich-doi-thu-shopee.html" class="post-card" data-tags="shopee data">
       <div class="card-img grad-3">🔍</div>
       <div class="card-body">
         <span class="post-tag tag-shopee">Shopee</span>
@@ -208,7 +209,7 @@
       </div>
     </a>
 
-    <a href="2026-05-13_ai-phan-tich-facebook-ads.html" class="post-card">
+    <a href="2026-05-13_ai-phan-tich-facebook-ads.html" class="post-card" data-tags="ads data">
       <div class="card-img grad-5">📊</div>
       <div class="card-body">
         <span class="post-tag tag-ads">Chạy ads</span>
@@ -221,10 +222,10 @@
       </div>
     </a>
 
-    <a href="2026-05-13_tu-dong-cham-soc-khach-sau-mua-shopee.html" class="post-card">
+    <a href="2026-05-13_tu-dong-cham-soc-khach-sau-mua-shopee.html" class="post-card" data-tags="automation shopee">
       <div class="card-img grad-1">⚙️</div>
       <div class="card-body">
-        <span class="post-tag">Tự động hóa</span>
+        <span class="post-tag tag-automation">Tự động hóa</span>
         <h3>Tự động gửi tin nhắn chăm sóc khách sau khi mua — Không cần làm tay</h3>
         <p>Setup workflow gửi tin nhắn cảm ơn + upsell tự động sau khi đơn hoàn thành trên Shopee.</p>
         <div class="card-footer">
@@ -255,3 +256,62 @@
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo">⚡ AI Ecom Vietnam</a>
+    <div class="footer-copy">© 2026 vietthuynguyen.com</div>
+  </div>
+</footer>
+
+<script>
+  const TAG_MAP = {
+    '🛒 Shopee': 'shopee',
+    '🎵 TikTok Shop': 'tiktok',
+    '📝 Viết content': 'content',
+    '💰 Chạy ads': 'ads',
+    '⚙️ Tự động hóa': 'automation',
+    '📊 Phân tích data': 'data',
+    'Tất cả': 'all'
+  };
+
+  function filterCards(tag) {
+    document.querySelectorAll('.post-card').forEach(card => {
+      if (tag === 'all') {
+        card.style.display = '';
+      } else {
+        const tags = (card.dataset.tags || '').split(' ');
+        card.style.display = tags.includes(tag) ? '' : 'none';
+      }
+    });
+  }
+
+  function setActiveBtn(tag) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('active');
+      const btnTag = TAG_MAP[btn.textContent.trim()] || 'all';
+      if (btnTag === tag) btn.classList.add('active');
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = TAG_MAP[btn.textContent.trim()] || 'all';
+      setActiveBtn(tag);
+      filterCards(tag);
+      const url = new URL(window.location);
+      if (tag === 'all') url.searchParams.delete('tag');
+      else url.searchParams.set('tag', tag);
+      history.replaceState(null, '', url);
+    });
+  });
+
+  // Đọc tag từ URL khi load trang
+  const urlTag = new URLSearchParams(window.location.search).get('tag') || 'all';
+  setActiveBtn(urlTag);
+  filterCards(urlTag);
+</script>
+</body>
+</html>
